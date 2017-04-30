@@ -3,12 +3,12 @@ import csv
 # test caesar http://www.dcode.fr/caesar-cipher
 ceaser_shift = 12
 
-def read_password_base():
-    base_file_path = 'base.txt'
 
+def read_password_base(base_file_path):
     with open(base_file_path, 'r') as csvfile:
         base_reader = csv.reader(csvfile, delimiter='|')
         return list(base_reader)
+
 
 def caesar(password, shift):
     password = password.lower()
@@ -42,6 +42,3 @@ def decrypt_base_password(password_base):
     for line in password_base:
         print "before %s" % line[1]
         print "after %s" % caesar_decrypt(line[1])
-
-base = read_password_base()
-decrypt_base_password(base)
