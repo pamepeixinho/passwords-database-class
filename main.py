@@ -25,7 +25,7 @@ def convert_list(list, convertionFunc, hashName):
 
 def reportMD5():
     md5Times = []
-    for x in range(0, 50):
+    for x in range(0, 10):
         md5Times.append(countTime('md5', convertion.encrypt_to_md5))
 
     report('MD5', md5Times)
@@ -36,7 +36,7 @@ def reportMD5():
 
 def reportSHA1():
     sha1Times = []
-    for x in range(0, 50):
+    for x in range(0, 10):
         sha1Times.append(countTime('sha1', convertion.encrypt_to_sha1))
 
     report('SHA1', sha1Times)
@@ -48,7 +48,7 @@ def reportSHA1():
 
 def reportSHA256():
     sha256Times = []
-    for x in range(0, 50):
+    for x in range(0, 10):
         sha256Times.append(countTime('sha256', convertion.encrypt_to_sha256))
 
     report('SHA256', sha256Times)
@@ -58,10 +58,14 @@ def report(name, array):
     mean = np.average(array)
     min = np.amin(array)
     max = np.amax(array)
+    var = np.var(array)
+    dp = np.sqrt(var)
 
     print("Mean %s --- %s seconds ---" % (name, mean))
     print("Min %s --- %s seconds ---" % (name, min))
     print("Max %s --- %s seconds ---" % (name, max))
+    print("Var %s --- %s seconds ---" % (name, var))
+    print("DP %s --- %s seconds ---" % (name, dp))
 
 
 reportMD5()
