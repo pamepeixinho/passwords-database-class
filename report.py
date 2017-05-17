@@ -3,6 +3,8 @@ import PasswordBase.base_writer as base_writer
 import PasswordConvertion.convertion as convertion
 import time
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.mlab import griddata
 
 base_file_path = './PasswordBase/'
 
@@ -32,6 +34,7 @@ def reportMD5():
     # print md5Times
     # mean = np.average(md5Times)
     # print("Mean %s --- %s seconds ---" % ('md5', mean))
+    return md5Times
 
 
 def reportSHA1():
@@ -44,6 +47,7 @@ def reportSHA1():
     # mean = np.average(sha1Times)
     # print mean
     # print("Mean %s --- %s seconds ---" % ('sha1', mean))
+    return sha1Times
 
 
 def reportSHA256():
@@ -52,6 +56,7 @@ def reportSHA256():
         sha256Times.append(countTime('sha256', convertion.encrypt_to_sha256))
 
     report('SHA256', sha256Times)
+    return sha256Times
 
 
 def report(name, array):
@@ -68,6 +73,23 @@ def report(name, array):
     print("DP %s --- %s seconds ---" % (name, dp))
 
 
-reportMD5()
-reportSHA1()
-reportSHA256()
+def ploting(x1, x2, x3):
+    plt.plot(x1, 'r--',  marker='o', label='MD5')
+    plt.plot(x2, 'b--',  marker='o', label='SHA1')
+    plt.plot(x3, 'g--',  marker='o', label='SHA256')
+
+    plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=3,
+               ncol=2, mode="expand", borderaxespad=0.)
+
+    # Save the mapping and save the image
+    plt.savefig('time_comparation.png')
+    plt.show()
+
+
+x1 = reportMD5()
+x2 = reportSHA1()
+x3 = reportSHA256()
+
+ploting(x1, x2, x3)
+
+# http://stackoverflow.com/questions/20412038/printing-python-code-to-pdf OLHAR
