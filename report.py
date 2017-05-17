@@ -1,18 +1,17 @@
-import PasswordBase.base_reader as base_reader
-import PasswordBase.base_writer as base_writer
-import PasswordConvertion.convertion as convertion
+from PasswordBase.base_reader import decrypt_base_password, read_password_base
+from PasswordBase.base_writer import writeNewBase
+from PasswordConvertion.convertion import encrypt_to_sha256, encrypt_to_sha1, encrypt_to_md5
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.mlab import griddata
 
 base_file_path = './PasswordBase/'
 
 
 def countTime(hashName, converstionFunc):
     start_time = time.time()
-    base_list = base_reader.read_password_base(base_file_path + 'base.txt')
-    list = base_reader.decrypt_base_password(base_list)
+    base_list = read_password_base(base_file_path + 'base.txt')
+    list = decrypt_base_password(base_list)
     convert_list(list, converstionFunc, hashName)
     timeUsed = (time.time() - start_time)
     # print("TIMEUSED %s --- %s seconds ---" % (hashName, timeUsed))
@@ -22,13 +21,13 @@ def countTime(hashName, converstionFunc):
 def convert_list(list, convertionFunc, hashName):
     for line in list:
         line[1] = convertionFunc(line[1])
-    base_writer.writeNewBase(base_file_path + 'base_' + hashName + '.txt', list)
+    writeNewBase(base_file_path + 'base_' + hashName + '.txt', list)
 
 
 def reportMD5():
     md5Times = []
     for x in range(0, 10):
-        md5Times.append(countTime('md5', convertion.encrypt_to_md5))
+        md5Times.append(countTime('md5', encrypt_to_md5))
 
     report('MD5', md5Times)
     # print md5Times
@@ -40,7 +39,7 @@ def reportMD5():
 def reportSHA1():
     sha1Times = []
     for x in range(0, 10):
-        sha1Times.append(countTime('sha1', convertion.encrypt_to_sha1))
+        sha1Times.append(countTime('sha1', encrypt_to_sha1))
 
     report('SHA1', sha1Times)
     # print md5Times
@@ -53,7 +52,7 @@ def reportSHA1():
 def reportSHA256():
     sha256Times = []
     for x in range(0, 10):
-        sha256Times.append(countTime('sha256', convertion.encrypt_to_sha256))
+        sha256Times.append(countTime('sha256', encrypt_to_sha256))
 
     report('SHA256', sha256Times)
     return sha256Times
