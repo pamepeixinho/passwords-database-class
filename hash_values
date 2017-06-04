@@ -1,0 +1,15 @@
+Mean MD5 --- 3.0146601359 seconds ---
+Min MD5 --- 2.80683398247 seconds ---
+Max MD5 --- 3.2793431282 seconds ---
+Var MD5 --- 0.0126338724312 seconds ---
+DP MD5 --- 0.112400500138 seconds ---
+Mean SHA1 --- 3.02388672829 seconds ---
+Min SHA1 --- 2.85973000526 seconds ---
+Max SHA1 --- 3.34804487228 seconds ---
+Var SHA1 --- 0.0103539825013 seconds ---
+DP SHA1 --- 0.10175452079 seconds ---
+Mean SHA256 --- 3.34592175484 seconds ---
+Min SHA256 --- 3.05559492111 seconds ---
+Max SHA256 --- 5.15194511414 seconds ---
+Var SHA256 --- 0.193734927024 seconds ---
+DP SHA256 --- 0.440153299458 seconds ---
